@@ -78,20 +78,20 @@ def doMusicMenuItem(gg, current):
         playSong(gg, "marioTheme", 75, 3.0)
         drawMusicMenu(gg, current)
     elif current == 1:
-        #godOnlyKnows(gg)
+        playSong(gg, "godOnlyKnows", 150, 3.0)
         drawMusicMenu(gg, current)
     elif current == 2:
-        #shireTheme(gg)
+        playSong(gg, "shireTheme", 150, 3.0)
         drawMusicMenu(gg, current)
     elif current == 3:
-        #wonderwall(gg)
+        playSong(gg, "wonderwall", 150, 3.0)
         drawMusicMenu(gg, current)
 
 
 def playSong(gg, filename, tone_duration, tempo):
-    mario = open("marioTheme", "r")
+    file = open(filename, "r")
     while True:
-        linesplit = mario.readline().split(",")
+        linesplit = file.readline().split(",")
         tone = linesplit[0]
         length = int(linesplit[1])
         if tone == "end":
@@ -103,7 +103,7 @@ def playSong(gg, filename, tone_duration, tempo):
         duration = tempo/length
         print(duration)
         gg.playTone(tone, tone_duration, duration)
-    mario.close()
+    file.close()
 
 def main(gg):
     runMusicMenu(gg, 0, False)
