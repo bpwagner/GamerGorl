@@ -1,9 +1,25 @@
+#sam adkins
+#latest 5/16/19
+
+
+from gamerGorl import gamerGorl
 
 import utime
+from machine import Pin
+from neopixel import NeoPixel
+
 
 def debugme(gg, str):
     gg.display.fill(0)
     gg.display.text(str, 40, 22)
+    gg.display.show()
+
+
+def help(gg):
+    gg.display.fill(0)
+    gg.display.text("Green", 47, 5)
+    gg.display.text("Yellow      Red", 4, 27)
+    gg.display.text("Blue", 47, 55)
     gg.display.show()
 
 
@@ -12,14 +28,14 @@ def showHighscore(gg, score, highscore2):
     gg.display.text("SCORE: " + str(score), 0, 0)
     gg.display.text("HIGHSCORE: " + str(highscore2), 0, 10)
     gg.display.text("PLAY AGAIN?", 20, 30)
-    gg.display.text("YES[A]", 80, 45)
-    gg.display.text("NO[B]", 10, 45)
+    gg.display.text("YES[A]", 10, 45)
+    gg.display.text("NO[B]", 80, 45)
     gg.display.show()
 
 
 def main(gg):
     # put your game loop here
-    f = open("SimonHighScore", "r")
+    f = open("HighscoreSimon", "r")
     highscore = int(f.readline())
     f.close()
 
@@ -33,12 +49,11 @@ def main(gg):
         gg.display.show()
         utime.sleep_ms(2000)
 
-        score = -1
+        score = 0
         colorList = []
         gameOver = False
 
         while (not gameOver):
-            score += 1
             debugme(gg, 'Level: ' + str(score))
             utime.sleep_ms(650)
 
@@ -72,15 +87,13 @@ def main(gg):
                     waiting = True
                     gameOver2 = False
                     while (waiting):
-                        debugme(gg, '...')
+                        help(gg)
                         joyX = gg.getJoyStickX()
                         joyY = gg.getJoyStickY()
                         APressed, BPressed = gg.getButtons()
-
                         if joyX > 750 and (APressed or BPressed):
                             gg.beep()
                             debugme(gg, 'Correct')
-                            utime.sleep_ms(150)
                             break
                         elif (APressed or BPressed) and not (joyX > 750):
                             gg.lowBeep()
@@ -95,7 +108,7 @@ def main(gg):
                     waiting = True
                     gameOver2 = False
                     while (waiting):
-                        debugme(gg, '...')
+                        help(gg)
                         joyX = gg.getJoyStickX()
                         joyY = gg.getJoyStickY()
                         APressed, BPressed = gg.getButtons()
@@ -103,7 +116,6 @@ def main(gg):
                         if joyY < 250 and (APressed or BPressed):
                             gg.beep()
                             debugme(gg, 'Correct')
-                            utime.sleep_ms(150)
                             break
                         elif (APressed or BPressed) and not (joyY < 250):
                             gg.lowBeep()
@@ -118,7 +130,7 @@ def main(gg):
                     waiting = True
                     gameOver2 = False
                     while (waiting):
-                        debugme(gg, '...')
+                        help(gg)
                         joyX = gg.getJoyStickX()
                         joyY = gg.getJoyStickY()
                         APressed, BPressed = gg.getButtons()
@@ -126,7 +138,6 @@ def main(gg):
                         if joyY > 750 and (APressed or BPressed):
                             gg.beep()
                             debugme(gg, 'Correct')
-                            utime.sleep_ms(150)
                             break
                         elif (APressed or BPressed) and not (joyY > 750):
                             gg.lowBeep()
@@ -141,7 +152,7 @@ def main(gg):
                     waiting = True
                     gameOver2 = False
                     while (waiting):
-                        debugme(gg, '...')
+                        help(gg)
                         joyX = gg.getJoyStickX()
                         joyY = gg.getJoyStickY()
                         APressed, BPressed = gg.getButtons()
@@ -149,7 +160,6 @@ def main(gg):
                         if joyX < 250 and (APressed or BPressed):
                             gg.beep()
                             debugme(gg, 'Correct')
-                            utime.sleep_ms(150)
                             break
                         elif (APressed or BPressed) and not (joyX < 250):
                             gg.lowBeep()
@@ -159,9 +169,11 @@ def main(gg):
                         gameOver = True
                         break
 
+            score += 1
+
         if score > highscore:
             highscore = score
-            f = open("SimonHighScore", "w")
+            f = open("HighscoreSimon", "w")
             f.write(str(highscore))
             f.close()
 
