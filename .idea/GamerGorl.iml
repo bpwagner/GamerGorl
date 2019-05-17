@@ -10,6 +10,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/.git" />
       <excludeFolder url="file://$MODULE_DIR$/Board" />
       <excludeFolder url="file://$MODULE_DIR$/NotNeeded" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />

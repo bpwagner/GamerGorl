@@ -16,7 +16,7 @@ from gamerGorl import gamerGorl
 #fs_free = fs_stat[0] * fs_stat[3]
 #print("File System Size {:,} - Free Space {:,}".format(fs_size, fs_free))
 
-menuList = ["About", "Snake", "Flappy Bird", "Simon", "Breakout", "Music Box", "2048", "LED Fun", "Test All", "Files", "OS", "Reboot", "Sound: Off"]
+menuList = ["About", "Snake", "Flappy Bird", "Simon", "Pong", "Music Box", "2048", "LED Fun", "Test All", "Files", "OS", "Reboot", "Sound: On"]
 aboutList = ["Gamer Gorl by...", " Mr Wagner", " Sam A", " Katie E", " Adam M", " Jack R", " Mitchel G", " Michael W"]
 
 def runMenu(current):
@@ -109,11 +109,11 @@ def doMenuItem(current):
         gc.collect()
         drawMenu(3)
     elif current == 4:
-        dummy()
-        #import machine
-        #machine.reset()
-        #import breakout
-        #breakout.main(gg)
+        import AnimeBreakout
+        AnimeBreakout.main(gg)
+        del sys.modules['AnimeBreakout']
+        gc.collect()
+        drawMenu(current)
     elif current == 5:
         import music
         music.main(gg)
